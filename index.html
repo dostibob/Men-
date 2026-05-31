@@ -2,15 +2,46 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Mis proyectos para ti</title>
     <style>
-        body { font-family: 'Arial', sans-serif; text-align: center; background-color: #f4f4f9; padding: 50px; }
-        .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
-        .tarjeta { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 250px; transition: transform 0.3s; }
-        .tarjeta:hover { transform: scale(1.05); }
-        .boton { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #ff6b6b; color: white; text-decoration: none; border-radius: 5px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            text-align: center; 
+            background-color: #fdf6f6; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .contenedor { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 20px; 
+            margin-top: 20px; 
+        }
+        .tarjeta { 
+            background: white; 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            width: 90%; /* Se adapta al ancho del celular */
+            max-width: 300px; /* No crece demasiado en tablets/PC */
+            transition: transform 0.3s; 
+        }
+        .boton { 
+            display: block; /* Botón grande para que sea fácil tocar con el dedo */
+            margin-top: 15px; 
+            padding: 15px; 
+            background: #ff6b6b; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold;
+        }
     </style>
 </head>
+<body>
 <body>
 
     <h1>💕 Colección de sitios creados para el amor de mi vida 💕</h1>
