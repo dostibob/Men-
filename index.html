@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><text x="0" y="18">💕</text></svg>'), auto; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -22,43 +22,31 @@
 
         h1 { font-family: 'Dancing Script', cursive; color: #ff6b6b; margin-bottom: 10px; }
 
-        .mensaje-personalizado {
-            background-color: #ffffff; border-left: 5px solid #ff6b6b;
-            padding: 15px; margin: 20px auto; max-width: 500px;
-            border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            font-style: italic; color: #555;
+        .seccion-razones { margin: 30px auto; max-width: 500px; }
+        #razon-texto { 
+            font-size: 1.2rem; color: #d63384; font-style: italic; 
+            min-height: 50px; margin: 15px 0; font-weight: bold;
         }
+        .btn-razon { 
+            background: #ff6b6b; color: white; border: none; padding: 10px 20px; 
+            border-radius: 20px; font-family: inherit; cursor: pointer; transition: 0.3s;
+        }
+        .btn-razon:hover { transform: scale(1.1); background: #ff4d4d; }
 
-        /* Contador */
         #contador {
             font-family: 'Dancing Script', cursive;
             font-size: 1.5rem; color: #ff6b6b; margin: 20px 0;
             background: rgba(255, 255, 255, 0.7); padding: 10px; border-radius: 10px;
         }
 
-        /* Estilo Polaroid restaurado */
         .polaroid {
-            background: white;
-            padding: 15px 15px 40px 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: inline-block;
-            margin: 20px auto;
-            transform: rotate(-2deg); 
-            max-width: 250px;
+            background: white; padding: 15px 15px 40px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: inline-block; margin: 20px auto;
+            transform: rotate(-2deg); max-width: 250px;
         }
-
-        .polaroid img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .pie-foto {
-            font-family: 'Dancing Script', cursive;
-            margin-top: 15px;
-            font-size: 1.3rem;
-            color: #555;
-        }
+        .polaroid img { width: 100%; height: auto; display: block; }
+        .pie-foto { font-family: 'Dancing Script', cursive; margin-top: 15px; font-size: 1.3rem; color: #555; }
 
         .contenedor { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 30px; }
         .tarjeta { 
@@ -67,7 +55,6 @@
             transition: transform 0.3s;
         }
         .tarjeta:hover { transform: scale(1.05); }
-
         .boton { 
             display: block; margin-top: 15px; padding: 12px; 
             background: #ff6b6b; color: white; text-decoration: none; 
@@ -86,24 +73,25 @@
 
     <div id="contador">Calculando nuestro tiempo juntos...</div>
 
-    <div class="mensaje-personalizado">
-        Un recorrido por mis trabajos más destacados, dedicados al proyecto que más significa para mí: nuestra relación.
+    <div class="seccion-razones">
+        <button class="btn-razon" onclick="mostrarRazon()">¿Por qué te amo? ✨</button>
+        <p id="razon-texto"></p>
     </div>
 
     <div class="contenedor">
         <div class="tarjeta">
             <h3>Nuestros recuerdos</h3>
-            <p>Momentos que quiero conservar para siempre junto a ti.</p>
+            <p>Cada fotografía guarda un pedacito de nuestra historia, momentos que quiero conservar para siempre junto a ti.</p>
             <a href="https://photos.app.goo.gl/5MDDJdqZ12Ccz2Cp9" class="boton">Ver álbum 📸</a>
         </div>
         <div class="tarjeta">
             <h3>Poema Para Mi Sol</h3>
-            <p>Dedicado al Sol que ilumina cada uno de mis días.</p>
+            <p>El primer poema que escribí para ti, por aquel Día de las Flores Amarillas, dedicado al Sol que ilumina cada uno de mis días.</p>
             <a href="https://dostibob.github.io/Flores/" class="boton">Leer poema 🌻</a>
         </div>
         <div class="tarjeta">
             <h3>Reproductor De Musica</h3>
-            <p>Escucha cómo mi corazón late por ti.</p>
+            <p>Un pequeño rinconcito donde siempre podrás escuchar como mi corazón late por ti.</p>
             <a href="https://dostibob.github.io/Musica/" class="boton">Escuchar música 🎵</a>
         </div>
     </div>
@@ -112,15 +100,25 @@
         function actualizarContador() {
             const fechaInicio = new Date("2025-12-07T00:00:00");
             const ahora = new Date();
-            const diferencia = ahora - fechaInicio;
-
-            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-            
-            document.getElementById("contador").innerHTML = 
-                `❤️ Llevamos juntos: ${dias} días de amor`;
+            const diff = ahora - fechaInicio;
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            document.getElementById("contador").innerHTML = `❤️ Llevamos juntos: ${dias} días de amor`;
         }
+        
+        const razones = [
+            "Tu sonrisa ilumina mi mundo entero.",
+            "La forma en que me miras me hace sentir el más afortunado.",
+            "Eres mi hogar y mi lugar favorito.",
+            "Nadie me entiende como tú lo haces.",
+            "Me encanta lo mucho que nos reímos juntos.",
+            "Tu fuerza y determinación me inspiran cada día."
+        ];
+
+        function mostrarRazon() {
+            const aleatoria = razones[Math.floor(Math.random() * razones.length)];
+            document.getElementById("razon-texto").innerText = aleatoria;
+        }
+
         setInterval(actualizarContador, 60000);
         actualizarContador();
     </script>
