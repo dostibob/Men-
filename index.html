@@ -8,7 +8,7 @@
     <!-- Favicon de cangrejito 🦀 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦀</text></svg>">
     
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Dancing+Script&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; }
@@ -157,6 +157,55 @@
             background: #ff4d4d;
         }
 
+        /* 🎃 ESTILOS PERSONALIZADOS PARA LA TARJETA DE HALLOWEEN 🎃 */
+        .tarjeta-halloween {
+            background: linear-gradient(135deg, #120c1f 0%, #1f1124 100%);
+            border: 2px solid #ff7518;
+            box-shadow: 0 0 15px rgba(255, 117, 24, 0.4), inset 0 0 10px rgba(147, 51, 234, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tarjeta-halloween h3 {
+            font-family: 'Creepster', cursive, system-ui;
+            color: #ff7518;
+            font-size: 1.8rem;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 117, 24, 0.6);
+        }
+
+        .tarjeta-halloween p {
+            color: #dcd6f7;
+        }
+
+        .boton-halloween {
+            background: linear-gradient(135deg, #ff7518, #9333ea);
+            color: #fff;
+            border: 1px solid #ffa15c;
+            box-shadow: 0 4px 10px rgba(147, 51, 234, 0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Estilo cuando el botón está bloqueado antes del 30 de octubre */
+        .boton-bloqueado {
+            background: #2a2438 !important;
+            color: #7b7293 !important;
+            border-color: #4a3f63 !important;
+            cursor: not-allowed !important;
+            box-shadow: none !important;
+        }
+
+        @media (hover: hover) {
+            .tarjeta-halloween:hover {
+                transform: translateY(-6px) scale(1.02);
+                border-color: #ffa15c;
+                box-shadow: 0 0 25px rgba(255, 117, 24, 0.7), 0 0 15px rgba(147, 51, 234, 0.5);
+            }
+            .boton-halloween:not(.boton-bloqueado):hover {
+                background: linear-gradient(135deg, #ff8c3b, #a855f7);
+            }
+        }
+
         /* AJUSTES EXTRA PARA DISPOSITIVOS MUY PEQUEÑOS */
         @media (max-width: 360px) {
             body { padding: 12px; }
@@ -220,6 +269,15 @@
             </div>
             <a href="https://dostibob.github.io/6-meses/" class="boton">Descubrelo aqui ☀️</a>
         </div>
+
+        <!-- 🎃 TARJETA DE HALLOWEEN CON TEMPORIZADOR 🎃 -->
+        <div class="tarjeta tarjeta-halloween">
+            <div>
+                <h3>¡Truco o Amor! 🎃</h3>
+                <p id="texto-halloween">Incluso en las sombras y entre calabazas hechizadas, tú sigues siendo mi luz favorita. Una pequeña sorpresa espeluznante para ti.</p>
+            </div>
+            <a id="link-halloween" href="#" onclick="verificarFecha(event)" class="boton boton-halloween">Explorar hechizo 👻</a>
+        </div>
     </div>
 
     <script>
@@ -251,8 +309,48 @@
             document.getElementById("razon-texto").innerText = aleatoria;
         }
 
+        // Configuración de la fecha límite (Viernes 30 de octubre a las 00:00 hrs)
+        const linkDestino = "AQUÍ_PEGAS_TU_LINK"; // Reemplaza esto con tu link real
+        const fechaDesbloqueo = new Date("2026-10-30T00:00:00"); // 2026 según el año actual
+
+        function comprobarDisponibilidadHalloween() {
+            const ahora = new Date();
+            const botonH = document.getElementById("link-halloween");
+            const parrafoH = document.getElementById("texto-halloween");
+
+            if (ahora < fechaDesbloqueo) {
+                // Aún no es 30 de octubre
+                botonH.classList.add("boton-bloqueado");
+                botonH.innerText = "🔒 Hechizo bloqueado ⏳";
+                
+                // Calcular cuánto falta
+                const diferencia = fechaDesbloqueo - ahora;
+                const diasFaltan = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+                const horasFaltan = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                parrafoH.innerHTML = `Este portal espeluznante se abrirá el <b>30 de octubre</b>.<br>Faltan: ${diasFaltan} días y ${horasFaltan} horas 👻🦇`;
+            } else {
+                // Ya es 30 de octubre o posterior
+                botonH.classList.remove("boton-bloqueado");
+                botonH.innerText = "Explorar hechizo 👻";
+                parrafoH.innerText = "¡El portal está abierto! Una pequeña sorpresa espeluznante preparada con todo mi amor para ti.";
+            }
+        }
+
+        function verificarFecha(evento) {
+            const ahora = new Date();
+            if (ahora < fechaDesbloqueo) {
+                evento.preventDefault(); // Evita que se abra el link
+                alert("🦇 ¡Ten paciencia, mi amor! Este hechizo se desbloqueará hasta el viernes 30 de octubre. 🎃");
+            } else {
+                // Redirige al link configurado si ya pasó la fecha
+                window.location.href = linkDestino;
+            }
+        }
+
         setInterval(actualizarContador, 60000);
         actualizarContador();
+        comprobarDisponibilidadHalloween();
     </script>
 </body>
 </html>
