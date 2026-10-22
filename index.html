@@ -186,7 +186,7 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Estilo cuando el botón está bloqueado antes del 30 de octubre */
+        /* Estilo cuando el botón está bloqueado antes de la fecha */
         .boton-bloqueado {
             background: #2a2438 !important;
             color: #7b7293 !important;
@@ -233,7 +233,7 @@
         <div class="tarjeta">
             <div>
                 <h3>Nuestros recuerdos</h3>
-                <p>Cada fotografía guarda un pedacito de nuestra historia, momentos que quiero conservar para siempre junto a ti.</p>
+                <p>Cada fotografía guarda un pedacito de nuestra historia, momentos que quiero conservar para siempre junto à ti.</p>
             </div>
             <a href="https://photos.app.goo.gl/5MDDJdqZ12Ccz2Cp9" class="boton">Ver álbum 📸</a>
         </div>
@@ -273,10 +273,10 @@
         <!-- 🎃 TARJETA DE HALLOWEEN CON TEMPORIZADOR 🎃 -->
         <div class="tarjeta tarjeta-halloween">
             <div>
-                <h3>¡Truco o Amor! 🎃</h3>
+                <h3>Halloween Juguetón 🎃</h3>
                 <p id="texto-halloween">Incluso en las sombras y entre calabazas hechizadas, tú sigues siendo mi luz favorita. Una pequeña sorpresa espeluznante para ti.</p>
             </div>
-            <a id="https://dostibob.github.io/Hallowen/" href="#" onclick="verificarFecha(event)" class="boton boton-halloween">Explorar hechizo 👻</a>
+            <a id="link-halloween" href="#" onclick="verificarFecha(event)" class="boton boton-halloween">Explorar hechizo 👻</a>
         </div>
     </div>
 
@@ -309,9 +309,9 @@
             document.getElementById("razon-texto").innerText = aleatoria;
         }
 
-        // Configuración de la fecha límite (Viernes 30 de octubre a las 00:00 hrs)
-        const linkDestino = "AQUÍ_PEGAS_TU_LINK"; // Reemplaza esto con tu link real
-        const fechaDesbloqueo = new Date("2026-10-30T00:00:00"); // 2026 según el año actual
+        // Configuración de la fecha límite: Viernes 30 de octubre a las 3:00 PM (15:00 hrs)
+        const linkDestino = "https://github.com/dostibob/Hallowen";
+        const fechaDesbloqueo = new Date("2026-10-30T15:00:00");
 
         function comprobarDisponibilidadHalloween() {
             const ahora = new Date();
@@ -319,18 +319,17 @@
             const parrafoH = document.getElementById("texto-halloween");
 
             if (ahora < fechaDesbloqueo) {
-                // Aún no es 30 de octubre
+                // Aún no es 30 de octubre a las 3 PM
                 botonH.classList.add("boton-bloqueado");
                 botonH.innerText = "🔒 Hechizo bloqueado ⏳";
                 
-                // Calcular cuánto falta
                 const diferencia = fechaDesbloqueo - ahora;
                 const diasFaltan = Math.floor(diferencia / (1000 * 60 * 60 * 24));
                 const horasFaltan = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 
-                parrafoH.innerHTML = `Este portal espeluznante se abrirá el <b>30 de octubre</b>.<br>Faltan: ${diasFaltan} días y ${horasFaltan} horas 👻🦇`;
+                parrafoH.innerHTML = `Este portal espeluznante se abrirá el <b>30 de octubre a las 3:00 PM</b>.<br>Faltan: ${diasFaltan} días y ${horasFaltan} horas 👻🦇`;
             } else {
-                // Ya es 30 de octubre o posterior
+                // Ya pasó la fecha y hora configurada
                 botonH.classList.remove("boton-bloqueado");
                 botonH.innerText = "Explorar hechizo 👻";
                 parrafoH.innerText = "¡El portal está abierto! Una pequeña sorpresa espeluznante preparada con todo mi amor para ti.";
@@ -340,10 +339,9 @@
         function verificarFecha(evento) {
             const ahora = new Date();
             if (ahora < fechaDesbloqueo) {
-                evento.preventDefault(); // Evita que se abra el link
-                alert("🦇 ¡Ten paciencia, mi amor! Este hechizo se desbloqueará hasta el viernes 30 de octubre. 🎃");
+                evento.preventDefault();
+                alert("🦇 ¡Ten paciencia, mi amor! Este hechizo se desbloqueará exactamente el viernes 30 de octubre a las 3:00 PM. 🎃");
             } else {
-                // Redirige al link configurado si ya pasó la fecha
                 window.location.href = linkDestino;
             }
         }
